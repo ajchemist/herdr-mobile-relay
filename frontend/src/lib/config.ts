@@ -24,13 +24,13 @@ export const APP_ASSET_VERSION = __APP_ASSET_VERSION__;
 export const SERVICE_WORKER_URL = __SERVICE_WORKER_URL__;
 export const THEMES = ['dark', 'light', 'nord', 'solarized', 'rose', 'latte'] as const;
 export type Theme = (typeof THEMES)[number];
-// Terminal color scheme per theme. Every theme keeps a dark terminal pane by
-// default; a light-terminal theme renders the pane on a light background and
-// swaps the ANSI palette so the desktop's light-scheme output stays legible.
+// Terminal color scheme per theme. Dark themes keep a dark terminal pane; the
+// light themes render the pane on Catppuccin Latte and swap the ANSI palette
+// so the desktop's light-scheme output stays legible.
 export type TerminalScheme = 'dark' | 'light';
 export const THEME_TERMINAL_SCHEMES: Record<Theme, TerminalScheme> = {
   dark: 'dark',
-  light: 'dark',
+  light: 'light',
   nord: 'dark',
   solarized: 'dark',
   rose: 'dark',

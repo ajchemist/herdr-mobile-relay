@@ -51,8 +51,11 @@
   --success: #167548;
   --warning: #9a6500;
   --trust: #7041a0;
-  --terminal: #151515;
-  --terminal-text: #f0f0f0;
+  /* Light chrome with a Catppuccin Latte terminal pane instead of a dark one. */
+  --terminal: #eff1f5;
+  --terminal-text: #4c4f69;
+  --terminal-link: #1e66f5;
+  --terminal-link-visited: #8839ef;
 }
 
 :root[data-theme='nord'] {
