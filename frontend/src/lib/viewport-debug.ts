@@ -1,8 +1,25 @@
 // Local diagnostic: open the app with ?herdr_debug=viewport to overlay the
 // numbers behind a layout gap on a device without an inspector. Not shipped
 // upstream.
+const DEBUG_KEY = 'herdr_debug_viewport';
+
+export function viewportDebugEnabled(): boolean {
+  try { return localStorage.getItem(DEBUG_KEY) === '1'; } catch { return false; }
+}
+
+export function setViewportDebug(enabled: boolean): void {
+  try {
+    if (enabled) localStorage.setItem(DEBUG_KEY, '1');
+    else localStorage.removeItem(DEBUG_KEY);
+  } catch { /* storage unavailable */ }
+  location.reload();
+}
+
 export function mountViewportDebug(): void {
-  if (!new URLSearchParams(location.search).has('herdr_debug')) return;
+  const param = new URLSearchParams(location.search).get('herdr_debug');
+  if (param === 'viewport') { try { localStorage.setItem(DEBUG_KEY, '1'); } catch { /* ignore */ } }
+  if (param === 'off') { try { localStorage.removeItem(DEBUG_KEY); } catch { /* ignore */ } }
+  if (!viewportDebugEnabled()) return;
   const probe = document.createElement('div');
   probe.style.cssText = 'position:fixed;left:-9999px;top:0;width:1px;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);';
   const units = ['100vh', '100dvh', '100svh', '100lvh', '100%'].map((unit) => {

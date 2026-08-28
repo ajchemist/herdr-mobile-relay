@@ -51,6 +51,7 @@
     setDeviceVerificationRequired,
   } from '$lib/security';
   import { relayStore } from '$lib/store';
+  import { setViewportDebug, viewportDebugEnabled } from '$lib/viewport-debug';
   import {
     appUpdateStatus,
     CHECKOUT_UPDATE_COMMAND,
@@ -548,6 +549,10 @@
       {#each INTERFACE_SIZES as item (item)}
         <button class:active={$interfaceSize === item} type="button" aria-pressed={$interfaceSize === item} onclick={() => setInterfaceSize(item as InterfaceSize)}>{item.charAt(0).toUpperCase() + item.slice(1)}</button>
       {/each}
+    </fieldset>
+    <fieldset class="choice-grid compact-grid">
+      <legend>Viewport Diagnostics (local)</legend>
+      <button type="button" aria-pressed={viewportDebugEnabled()} class:active={viewportDebugEnabled()} onclick={() => setViewportDebug(!viewportDebugEnabled())}>{viewportDebugEnabled() ? 'On — tap to turn off' : 'Off — tap to turn on'}</button>
     </fieldset>
     <fieldset class="choice-grid compact-grid">
       <legend>Home Workspaces</legend>
